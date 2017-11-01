@@ -28,7 +28,7 @@
             <![endif]-->
 
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center templatemo-logo margin-top-20">
-                <h1 class="templatemo-site-title">
+                <h1 class="templatemo-site-title">WEB DESIGN
                     <a href="#">Zoom Template</a>
                 </h1>
                 <h3 class="templatemo-site-title">
@@ -107,8 +107,25 @@
                         <section id="products-section" class="inactive">
                             <div class="row">
                                 <div class="col-sm-6 col-md-6 col-lg-6 margin-bottom-20">
-                                    <div class="black-bg col-sm-12 col-md-12 col-lg-12">
+                                    < class="black-bg col-sm-12 col-md-12 col-lg-12">
                                         <h2>WEB DESIGN</h2>
+                                        <p><form action={%  url 'getSubnet' %} method="post">
+                                            <label>subnet</label>
+                                            <input name="subnet" type="text" value="{{ form.subnet }}">
+
+                                            <label>mask</label>
+                                            <input name="mask" type="text" value="{{ form.mask }}">
+
+                                            <label>loopback</label>
+                                            <input name="loopback" type="text" value="{{ form.loopback }}">
+
+                                            <label>location</label>
+                                            <input name="location" type="text" value="{{ form.location }}">
+
+                                            <input type="submit" value="Send">
+
+                                        </form>
+                                    </p>
                                         <p>Zoom is free HTML5 website template for everyone. You can use this template for any purpose. Credit goes to <a rel="nofollow" href="http://unsplash.com">Unsplash</a> for photos used in this template. Integer posuere quam a orci tempor, ut eleifend est vulputate. Nullam vitae lectus dui. Donec vulputate ac tortor id convallis. Sed nisi mauris, laoreet vitae lacus at, viverra viverra neque.</p>
                                     </div>
                                 </div>
