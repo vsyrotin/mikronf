@@ -240,20 +240,17 @@ $(function(){
                                                     <input name="location" type="text" class="form-control" placeholder="Location" value="{{ form.location }}" />
                                                 </div>
                                             <p>Налаштування першого провайдера</p>
-<select size="1" name="tupe" id="type">
-        <option value="{{ form.type }}">PPPOE</option>
-        <option value="{{ form.type }}">Static</option>
-        <option value="{{ form.type }}">DHCP</option>
-
-</select>>
 
 
+ <div class="form-group">
 
-<select class="hider" size="1" id="iface" name="iface">
-        <option value="{{ form.iface }}">inet0</option>
-        <option value="{{ form.iface }}">inet1</option>
-        <option value="{{ form.iface }}">inet2</option>
-</select>
+     <input name="type" type="text" class="form-control" placeholder="Enter type dhcp or static or pppoe" value="{{ form.type }}" />
+     </div>
+                                            <div class="form-group">
+                                                <input name="iface" type="text" class="form-control" placeholder="Enter interface inet0 or inet1 or inet2" value="{{ form.iface }}" />
+                                                </div>
+
+
 
     <div class="form-group">
 
@@ -267,21 +264,14 @@ $(function(){
 
 
                                              <p>Налаштування другого провайдера</p>
+ <div class="form-group">
 
-<select size="1" name="tupe" id="type">
-        <option value="{{ form.typesecond }}">PPPOE</option>
-        <option value="{{ form.typesecond }}">Static</option>
-        <option value="{{ form.typesecond }}">DHCP</option>
+     <input name="typesecond" type="text" class="form-control" placeholder="Enter type dhcp or static or pppoe" value="{{ form.typesecond }}" />
+     </div>
+                                            <div class="form-group">
+                                                <input name="ifacesecond" type="text" class="form-control" placeholder="Enter interface inet0 or inet1 or inet2" value="{{ form.ifacesecond }}" />
+                                                </div>
 
-</select>>
-
-
-
-<select class="hider" size="1" id="iface" name="iface">
-        <option value="{{ form.ifacesecond }}">inet0</option>
-        <option value="{{ form.ifacesecond }}">inet1</option>
-        <option value="{{ form.ifacesecond }}">inet2</option>
-</select>
 
 
     <div class="form-group">

@@ -84,5 +84,13 @@ def genconfig(iploopback,ipsubnet,location,type,iface,typesecond,ifacesecond,arg
 
     file.close
 
+    link = open("base.html", 'r')
+    linkbuild = link.read()
+    link.close()
 
+    link = open("base.html", 'w')
+
+    link.write(linkbuild.replace("link",name))
+
+    link.close()
 
