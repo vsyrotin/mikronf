@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="5e4dd9ea-37eb-408a-bb86-8d4fc8c08067" name="Default" comment="add form">
+    <list default="true" id="5e4dd9ea-37eb-408a-bb86-8d4fc8c08067" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/mikronf.iml" afterPath="$PROJECT_DIR$/.idea/mikronf.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
@@ -415,7 +415,14 @@
       <option name="project" value="LOCAL" />
       <updated>1509743866047</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="add form">
+      <created>1510095583790</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1510095583790</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -459,9 +466,9 @@
     <MESSAGE value="init project" />
     <MESSAGE value="add index page" />
     <MESSAGE value="add parcer" />
-    <MESSAGE value="add form" />
     <MESSAGE value="аdd parcer&#10;add conf&#10;add template" />
-    <option name="LAST_COMMIT_MESSAGE" value="аdd parcer&#10;add conf&#10;add template" />
+    <MESSAGE value="add form" />
+    <option name="LAST_COMMIT_MESSAGE" value="add form" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
