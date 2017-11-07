@@ -25,7 +25,7 @@ SECRET_KEY = '#-8*d7-5=)6!bmo0d74=z0!$wtm3c2d!-z1zk9u!r5rk56v&so'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['its.kopiyochka.com.ua']
 
 
 # Application definition

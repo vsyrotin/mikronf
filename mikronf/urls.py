@@ -22,4 +22,6 @@ urlpatterns = [
     url(r'^$',views.index, name='index'),
     url(r'^getSubnet/', include('getSubnet.urls')),
     url(r'^admin/', admin.site.urls),
+    url(r'^opt/mikronf/tmp/mkconf', views.send_file)
+
 ]

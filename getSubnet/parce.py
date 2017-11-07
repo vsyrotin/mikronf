@@ -6,6 +6,27 @@ import getSubnet
 
 # call like this genconfig("127.0.0.1","192.168.0.1","24","test")
 def genconfig(iploopback,ipsubnet,location,type,iface,typesecond,ifacesecond,args,args2,argssecond,args2second):
+    # static
+    addAddress = "/ip address add address=%s interface=%s" % (args, iface)
+    addAddress2 = "/ip address add address=%s interface=%s" % (args2, ifacesecond)
+    addGw = "/ip route add dst-address=0.0.0.0/0 gateway=%s" % args2
+    addGW2 = "/ip route add dst-address=0.0.0.0/0 gateway=%s" % args2second
+
+    #dhcp
+    addDhcp1 = "/ip dhcp-client add interface=%s add-default-route=yes use-peer-dns=no use-peer-ntp=no" % iface
+    addDhcp2 = "/ip dhcp-client add interface=%s add-default-route=yes use-peer-dns=no use-peer-ntp=no" % ifacesecond
+
+    #pppoe
+    addpppoe1 = "/interface pppoe-client add interface=%s disabled=yes user=%s " \
+                "password=%s profile=default-encryption add-default-route=yes " \
+                "dial-on-demand=no use-peer-dns=no" % (iface, args, args2)
+    addpppoe2 = "/interface pppoe-client add interface=%s disabled=yes user=%s " \
+                "password=%s profile=default-encryption add-default-route=yes " \
+                "dial-on-demand=no use-peer-dns=no" % (ifacesecond,argssecond,args2second)
+    addGwPPPOE = "/ip route add dst-address=0.0.0.0/0 gateway=%s" % iface
+    addGW2PPPOE = "/ip route add dst-address=0.0.0.0/0 gateway=%s" % ifacesecond
+
+
     mask = "26"
     print(ipsubnet)
     firstoct = (str(ipsubnet).split('.')[0])
@@ -23,74 +44,57 @@ def genconfig(iploopback,ipsubnet,location,type,iface,typesecond,ifacesecond,arg
     file.close()
     name = location+"conf-" + str(datetime.datetime.now().date().year) + "-" + str(datetime.datetime.now().date().month) \
            + "-" + str(datetime.datetime.now().date().day)
-    file = open(os.path.join(os.path.expanduser('E:\python\mikronf\generic'), name),'w')
+    file = open(os.path.join(os.path.expanduser('/opt/mikronf/getSubnet/generic'), name),'w')
 
-    if type == "dhcp" and typesecond == "dhcp":
-        file.write(text.replace("iploopback", iploopback).replace("ipsubnet", ipsubnet).replace("mask", mask)
-                   .replace("location", location).replace("dhcpiface", iface).replace("dhcpiface2",ifacesecond)
-                   .replace("ipgw",gw).replace("ipStart",startrange).replace("ipEnd",endrange))
-
-    if type == "dhcp" and typesecond == "static":
-        file.write(text.replace("iploopback", iploopback).replace("ipsubnet", ipsubnet).replace("mask", mask)
-                   .replace("location", location).replace("dhcpiface", iface).replace("ifacesecond", ifacesecond).replace("ipaddrpr2",argssecond)
-                   .replace("gataweypr2", args2second).replace("ipgw",gw).replace("ipStart",startrange).replace("ipEnd",endrange))
-
-    if type == "dhcp" and typesecond == "pppoe":
-        file.write(text.replace("iploopback", iploopback).replace("ipsubnet", ipsubnet).replace("mask", mask)
-                   .replace("location", location).replace("dhcpiface", iface).replace("pppoeiface2", ifacesecond).replace("pppoeusernamepr2",argssecond)
-                   .replace("pppoepasswordpr2", args2second).replace("ipgw",gw).replace("ipStart",startrange).replace("ipEnd",endrange))
-    ####################################################################################################################
-
-    if type == "static" and typesecond == "dhcp":
-        file.write(text.replace("iploopback", iploopback).replace("ipsubnet", ipsubnet).replace("mask", mask)
-               .replace("location", location).replace("iface", iface).replace("dhcpiface2",ifacesecond).replace("ipaddrpr1",args)
-                   .replace("gataweypr1", args2).replace("ipgw",gw).replace("ipStart",startrange).replace("ipEnd",endrange))
-
-    if type == "static" and typesecond == "static":
-        file.write(text.replace("iploopback", iploopback).replace("ipsubnet", ipsubnet).replace("mask", mask)
-                   .replace("location", location).replace("iface", iface)
-                   .replace("typesecond", typesecond).replace("ipaddrpr2",argssecond)
-                   .replace("gataweypr2", args2second).replace("ipaddrpr1",args)
-                   .replace("gataweypr1", args2).replace("ipgw",gw).replace("ipStart",startrange).replace("ipEnd",endrange))
-
-    if type == "static" and typesecond == "pppoe":
-        file.write(text.replace("iploopback", iploopback).replace("ipsubnet", ipsubnet).replace("mask", mask)
-                   .replace("location", location).replace("iface", iface)
-                   .replace("pppoeiface2", ifacesecond).replace("pppoeusernamepr2",argssecond)
-                   .replace("pppoepasswordpr2", args2second).replace("ipaddrpr1",args)
-                   .replace("gataweypr1", args2).replace("ipgw",gw).replace("ipStart",startrange).replace("ipEnd",endrange))
-    #####################################################################################################################
-
-    if type == "pppoe" and typesecond == "dhcp":
-        file.write(text.replace("iploopback", iploopback).replace("ipsubnet", ipsubnet).replace("mask", mask)
-               .replace("location", location).replace("pppoeiface1", iface)
-                   .replace("dhcpiface",ifacesecond).replace("pppoeusernamepr1",args)
-                   .replace("pppoepasswordpr1", args2).replace("ipgw",gw).replace("ipStart",startrange).replace("ipEnd",endrange))
-
-    if type == "pppoe" and typesecond == "static":
-        file.write(text.replace("iploopback", iploopback).replace("ipsubnet", ipsubnet).replace("mask", mask)
-                   .replace("location", location).replace("pppoeiface1", iface)
-                   .replace("iface", ifacesecond).replace("ipaddrpr2",argssecond)
-                   .replace("gataweypr2", args2second).replace("pppoeusernamepr1",args)
-                   .replace("pppoepasswordpr1", args2).replace("ipgw",gw).replace("ipStart",startrange).replace("ipEnd",endrange))
-
-    if type == "pppoe" and typesecond == "pppoe":
-        file.write(text.replace("iploopback", iploopback).replace("ipsubnet", ipsubnet).replace("mask", mask)
-                   .replace("location", location).replace("pppoeiface1", iface)
-                   .replace("pppoeiface2", ifacesecond).replace("pppoeusernamepr2",argssecond)
-                   .replace("pppoepasswordpr2", args2second).replace("pppoeusernamepr1",args)
-                   .replace("pppoepasswordpr1", args2).replace("ipgw",gw).replace("ipStart",startrange).replace("ipEnd",endrange))
-
+    file.write(text.replace("iploopback", iploopback).replace("ipsubnet", ipsubnet).replace("mask", mask)
+                   .replace("location", location).replace("ipStart",startrange).replace("ipEnd",endrange))
 
     file.close
 
-    link = open("base.html", 'r')
-    linkbuild = link.read()
-    link.close()
+    if type == "static" and typesecond == "static":
+        prov = open(os.path.join(os.path.expanduser('/opt/mikronf/getSubnet/generic'), name), 'a')
+        prov.write('\n' + addAddress + '\n' + addAddress2 + '\n' + addGw + '\n' + addGW2)
+        prov.close()
 
-    link = open("base.html", 'w')
+    if type == "static" and typesecond == "dhcp":
+        prov = open(os.path.join(os.path.expanduser('/opt/mikronf/getSubnet/generic'), name), 'a')
+        prov.write('\n' + addAddress + '\n' + addGw + '\n' + addDhcp2)
+        prov.close()
 
-    link.write(linkbuild.replace("link",name))
+    if type == "static" and typesecond == "pppoe":
+        prov = open(os.path.join(os.path.expanduser('/opt/mikronf/getSubnet/generic'), name), 'a')
+        prov.write('\n' + addAddress + '\n' + addGw + '\n' + addpppoe2 + '\n' + addGW2PPPOE)
+        prov.close()
 
-    link.close()
+    if type == "dhcp" and typesecond == "static":
+        prov = open(os.path.join(os.path.expanduser('/opt/mikronf/getSubnet/generic'), name), 'a')
+        prov.write('\n' + addAddress2 + '\n' + addGW2 + '\n' + addDhcp1)
+        prov.close()
 
+    if type == "dhcp" and typesecond == "pppoe":
+        prov = open(os.path.join(os.path.expanduser('/opt/mikronf/getSubnet/generic'), name), 'a')
+        prov.write('\n' + addDhcp1 + '\n' + addpppoe2 + '\n' + addGW2PPPOE)
+        prov.close()
+
+    if type == "dhcp" and typesecond == "dhcp":
+        prov = open(os.path.join(os.path.expanduser('/opt/mikronf/getSubnet/generic'), name), 'a')
+        prov.write('\n' + addDhcp1 + '\n' + addDhcp2)
+        prov.close()
+
+    if type == "pppoe" and typesecond == "static":
+        prov = open(os.path.join(os.path.expanduser('/opt/mikronf/getSubnet/generic'), name), 'a')
+        prov.write('\n' + addpppoe1 + '\n' + addGwPPPOE + '\n' + addAddress2 + '\n' + addGW2)
+        prov.close()
+
+    if type == "pppoe" and typesecond == "pppoe":
+        prov = open(os.path.join(os.path.expanduser('/opt/mikronf/getSubnet/generic'), name), 'a')
+        prov.write('\n' + addpppoe1 + '\n' + addGwPPPOE + '\n' + addpppoe2 + '\n' + addGW2PPPOE)
+        prov.close()
+
+    if type == "pppoe" and typesecond == "dhcp":
+        prov = open(os.path.join(os.path.expanduser('/opt/mikronf/getSubnet/generic'), name), 'a')
+        prov.write('\n' + addpppoe1 + '\n' + addGwPPPOE + '\n' + addDhcp2)
+        prov.close()
+
+    path = "/opt/mikronf/getSubnet/generic/" + name
+    os.system("cp %s /opt/mikronf/mkconf" % path)

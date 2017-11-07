@@ -4,6 +4,10 @@ from django.template import RequestContext
 from django.template.defaulttags import csrf_token
 from django.views.decorators.csrf import csrf_exempt
 from getSubnet.parce import genconfig
+import os, tempfile, zipfile
+from django.core.servers.basehttp import FileWrapper
+from django.conf import settings
+import mimetypes
 
 
 @csrf_exempt
@@ -16,17 +20,17 @@ def getSubnet(request):
         form['mask'] = request.POST.get('mask')
         form['loopback'] = request.POST.get('loopbask')
         form['location'] = request.POST.get('location')
-        iploopback = request.POST.get('loopback')
-        ipsubnet = request.POST.get('subnet')
-        location = request.POST.get('location')
-        type = request.POST.get('type')
-        iface = request.POST.get('iface')
-        typesecond = request.POST.get('typesecond')
-        ifacesecond = request.POST.get('ifacesecond')
-        args = request.POST.get('args')
-        args2 = request.POST.get('args2')
-        argssecond = request.POST.get('argssecond')
-        args2second = request.POST.get('args2second')
+        iploopback = str(request.POST.get('loopback'))
+        ipsubnet = str(request.POST.get('subnet'))
+        location = str(request.POST.get('location'))
+        type = str(request.POST.get('type'))
+        iface = str(request.POST.get('iface'))
+        typesecond = str(request.POST.get('typesecond'))
+        ifacesecond = str(request.POST.get('ifacesecond'))
+        args = str(request.POST.get('args'))
+        args2 = str(request.POST.get('args2'))
+        argssecond = str(request.POST.get('argssecond'))
+        args2second = str(request.POST.get('args2second'))
 
         genconfig(iploopback, ipsubnet, location, type, iface, typesecond, ifacesecond, args, args2, argssecond, args2second)
 
@@ -34,3 +38,5 @@ def getSubnet(request):
 
 
     return render(request,'getSubnet/base.html', {'errors': errors, 'form':form})
+
+
