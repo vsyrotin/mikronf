@@ -5,7 +5,8 @@ import datetime
 import getSubnet
 
 # call like this genconfig("127.0.0.1","192.168.0.1","24","test")
-def genconfig(iploopback,ipsubnet,location,type,iface,typesecond,ifacesecond,args,args2,argssecond,args2second):
+def genconfig(iploopback,ipsubnet,location,type,iface,typesecond,ifacesecond,args,args2,argssecond,args2second,
+              tunuser1,tunpass1,tuncert1,tungw1,tunuser2,tunpass2,tuncert2,tungw2):
     # static
     addAddress = "/ip address add address=%s interface=%s" % (args, iface)
     addAddress2 = "/ip address add address=%s interface=%s" % (args2, ifacesecond)
@@ -47,7 +48,10 @@ def genconfig(iploopback,ipsubnet,location,type,iface,typesecond,ifacesecond,arg
     file = open(os.path.join(os.path.expanduser('/opt/mikronf/getSubnet/generic'), name),'w')
 
     file.write(text.replace("iploopback", iploopback).replace("ipsubnet", ipsubnet).replace("mask", mask)
-                   .replace("location", location).replace("ipStart",startrange).replace("ipEnd",endrange))
+                   .replace("location", location).replace("ipStart",startrange).replace("ipEnd",endrange)
+               .replace("tunuser1", tunuser1).replace("tunuser2", tunuser2).replace("tunpass1",tunpass1)
+               .replace("tunpass2", tunpass2).replace("tungw1", tungw1).replace("tungw2", tungw2)
+               .replace("tuncert1", tuncert1).replace("tuncert2", tuncert2))
 
     file.close
 

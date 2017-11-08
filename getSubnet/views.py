@@ -32,7 +32,19 @@ def getSubnet(request):
         argssecond = str(request.POST.get('argssecond'))
         args2second = str(request.POST.get('args2second'))
 
-        genconfig(iploopback, ipsubnet, location, type, iface, typesecond, ifacesecond, args, args2, argssecond, args2second)
+        tunuser1 = str(request.POST.get('tunuser1'))
+        tunpass1 = str(request.POST.get('tunpass1'))
+        tungw1 = str(request.POST.get('tungw1'))
+        tuncert1 = str(request.POST.get('tuncert1'))
+
+        tunuser2 = str(request.POST.get('tunuser2'))
+        tunpass2 = str(request.POST.get('tunpass2'))
+        tungw2 = str(request.POST.get('tungw2'))
+        tuncert2 = str(request.POST.get('tuncert2'))
+
+
+        genconfig(iploopback, ipsubnet, location, type, iface, typesecond, ifacesecond, args, args2, argssecond,
+                  args2second, tunuser1,tunpass1,tuncert1,tungw1,tunuser2,tunpass2,tuncert2,tungw2)
 
 
 

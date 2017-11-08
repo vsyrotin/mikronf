@@ -26,4 +26,15 @@ def send_file(request):
   response['Content-Disposition'] = "attachment; filename=%s"%download_name
   return response
 
+def send_cert(request):
+
+
+  filename     = "/opt/mikronf/mkconf" # Select your file here.
+  download_name ="cert"
+  wrapper      = FileWrapper(open(filename))
+  content_type = mimetypes.guess_type(filename)[0]
+  response     = HttpResponse(wrapper,content_type=content_type)
+  response['Content-Length']      = os.path.getsize(filename)
+  response['Content-Disposition'] = "attachment; filename=%s"%download_name
+  return response
 
