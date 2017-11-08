@@ -30,7 +30,7 @@ def send_cert(request):
 
 
   filename     = "/opt/mikronf/mkconf" # Select your file here.
-  download_name ="cert"
+  download_name ="id_dsa.pub"
   wrapper      = FileWrapper(open(filename))
   content_type = mimetypes.guess_type(filename)[0]
   response     = HttpResponse(wrapper,content_type=content_type)
